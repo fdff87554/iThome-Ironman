@@ -29,8 +29,10 @@
 在我們知道什麼事 WAN & LAN 之後，我們總算知道網孔怎麼差了，現在來讓我們看看 ASUS 的設定介面
     > ![ASUS Router Setting](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/ASUS-Router-Setting.png)
 
-可以看到裡面有 WAN 跟 LAN 的設定選項，先看 WAN 的設定選項，有
-    > ![ASUS Router WAN Setting]()
+可以看到裡面有 WAN 跟 LAN 的設定選項，先看 WAN 的設定選項，有 `Internet Connection` / `Dual WAN` / `Port Trigger` 等等可以調整設定的項目。
+    > ![ASUS Router WAN Setting](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/ASUS-Router-WAN-Setting.png)
+
+而 LAN 的設定選項則有
 
 
 ## References
