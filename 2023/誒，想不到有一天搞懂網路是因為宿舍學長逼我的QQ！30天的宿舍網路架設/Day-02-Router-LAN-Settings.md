@@ -1,8 +1,8 @@
 # Day-02 - 從 Router LAN 設定學網路知識
 
 昨天有提到 ASUS Router 的設定頁面裡面有很多可以調整跟設定的部分，每個設定都有其存在的意義跟希望解決的問題與功能，因此今天就一樣讓我們藉由 LAN 的設定選項中的可調整的項目學習功能與服務吧。
-> ![ASUS Router LAN Setting](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/ASUS-Router-LAN-Setting.png)
 
+> ![ASUS Router LAN Setting](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/ASUS-Router-LAN-Setting.png)
 
 ## LAN Setting
 
@@ -10,6 +10,17 @@
 
 首先看到 LAN 的部分，他們主要切分了 `LAN IP` / `DHCP Server` / `Route` / `IPTV` / `Switch Control` 五個功能，讓我們一個一個拆解這些功能是幹嘛用的。
 
-### LAN IP
+### LAN IP Settings
 
-我們之前提過了，當今天我要找到一個網路設備的時候，就是利用
+> ![LAN IP Settings](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/ASUS-Router-LAN-IP-Setting.png)
+先來看看 LAN IP 這個格子裡面可以設定什麼，可以看到很乾淨的就只有兩個部分，
+
+1. `LAN IP`
+2. `Subnet Mask`
+
+那為什麼會需要有這兩個設定值？讓我們聊聊一下現在 Router 所扮演的角色，還有 IP Address 的一些資訊。
+
+#### About IP Address
+
+
+
