@@ -136,3 +136,13 @@ Route 中文翻譯叫路由，可以想像成如何制定今天從 A 到 B 的�
 基本上 LAN 的相關設定都是為了界定設備可以怎麼更好的取得網路，還有如何互相互動，當然，這些設定的背後都代表著各種網路概念與管理概念，如何精熟這些設定我也不敢說自己非常清楚了，但實際走過一遍確實有加速我對於網路概念知識的理解，因此大家也可以玩自己家的路由器看看歐～
 
 讓我們明天聊聊 WAN 相關設定吧！
+
+## References
+
+- [Introduction of Classful IP Addressing - geeksforgeeks](https://www.geeksforgeeks.org/introduction-of-classful-ip-addressing/)
+- [IP Subnet Calculator - Calculator.net](https://www.calculator.net/ip-subnet-calculator.html)
+- [What is an IP address and a subnet mask, in simple terms? - Digital Citizen](https://www.digitalcitizen.life/what-is-ip-address-subnet/)
+- [What Is a Subnet Mask? A Beginner's Guide to Subnetting - IPXO](https://www.ipxo.com/blog/what-is-subnet-mask/)
+- [DHCP (Dynamic Host Configuration Protocol) - TechTarget](https://www.techtarget.com/searchnetworking/definition/DHCP)
+- [What is DHCP and why is it important? - efficient iP](https://efficientip.com/glossary/what-is-dhcp-and-why-is-it-important/)
+- [IPTV - Wifipedia](https://zh.wikipedia.org/zh-tw/IPTV)
