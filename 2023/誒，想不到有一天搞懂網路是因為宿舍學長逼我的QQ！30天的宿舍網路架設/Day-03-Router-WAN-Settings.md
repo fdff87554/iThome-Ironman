@@ -12,8 +12,6 @@
 
 ### Internet Connection 設定
 
-> ![ASUS Router WAN Setting Internet Connection](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/ASUS-Router-WAN-Internet-Connection.png)
-
 先來看看整體設定，可以發現他有分成幾個不同的設定區域，讓我們一個一個慢慢看。
 
 #### Basic Config - 基本設置
@@ -23,6 +21,7 @@
 下方的示意圖就是一般來說剛今天網路連線是透過中華電信小烏龜，跟在學校配合學校的設定去使用自己的 Router 時的結構狀況。
 
 > ![Router from ISP](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/Graph-of-Router-from-ISP.png)
+
 > ![Router from School Dormitory](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/Graph-of-Router-from-School-Dormitory.png)
 
 那今天讓我們看看在 Internet Connection 在選擇 Connection Type 時的選項有哪些。
@@ -40,6 +39,8 @@
 另外由於 DHCP 也會比如 DNS Server 相關資料都設定好，因此當設定 Static IP 時，也會需要填上相關資訊，跟昨天一樣的說明，由於我自己有另外開 DNS Server，因此是指向自己的服務，要不然可以直接使用 Google 跟 Cloudflare 所提供的 `1.1.1.1` 跟 `8.8.8.8` 即可，又或者如我們是學校的網路設定時，他們也會直接提供可以連線的位置歐。
 
 > ![School Dormitory IP Setting Documents](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/School-Dormitory-IP-Setting.png)
+
+
 
 
 
