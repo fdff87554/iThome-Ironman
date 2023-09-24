@@ -10,7 +10,9 @@
 
 為此我們要稍微調整一下資料來源。從 [官方文件](https://pve.proxmox.com/pve-docs/pve-admin-guide.html#sysadmin_package_repositories) 的說明裝可以看到 APT Repositories 的相關定義文件是由 `/etc/apt/sources.list` 跟 `/etc/apt/sources.list.d/` 裡面做維護。
 
-那 PVE 官方有直接說明，如果你是有訂閱的使用者，想取得穩定且預設的環境，會是由 `deb https://enterprise.proxmox.com/debian/pve bookworm pve-enterprise` 維護。如果你沒有訂閱，則可以直接參考下方調整並把東西貼到 `/etc/apt/sources.list` 中。
+那 PVE 官方有直接說明，如果你是有訂閱的使用者，想取得穩定且預設的環境，會是由 `/etc/apt/sources.list.d/pve-enterprise.list` 中的 `deb https://enterprise.proxmox.com/debian/pve bookworm pve-enterprise` 維護。
+
+如果你沒有訂閱，一樣要到 `/etc/apt/sources.list.d/pve-enterprise.list` 中註解，然後可以直接參考下方調整並把東西貼到 `/etc/apt/sources.list` 中。
 
 ```bash=
 deb http://ftp.debian.org/debian bookworm main contrib
@@ -25,6 +27,8 @@ deb http://security.debian.org/debian-security bookworm-security main contrib
 ```
 
 而 `/etc/apt/sources.list.d/ceph.list` 裡面則是調整成 `deb http://download.proxmox.com/debian/ceph-quincy bookworm no-subscription`
+
+為了安全性簽署，還需要 `wget https://enterprise.proxmox.com/debian/proxmox-release-bookworm.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bookworm.gpg`
 
 ## 情境盤點與宿舍網路結構拓樸圖
 
