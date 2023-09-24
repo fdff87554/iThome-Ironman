@@ -2,6 +2,30 @@
 
 我們現在有 PVE 在我們的內網了，但今天這台 PVE Server 一樣遇到了一個問題，他在內網，在連線上除非我直接對其做 Port Forwarding Public 在外網以外，是無法直接在外部連線的。但我這邊當然是不希望測試用跟這麼隱私的環境在外網裸奔，等等被人揍了怎辦對吧？因此讓我們來盤點一下我們的網路環境跟各種狀況，順便整理一下接下來要達成這些目標，會需要多少設備與環境吧！
 
+## PVE 環境設定補充
+
+由於 PVE 仍然有官方的維護資源跟社群維護資源的差異，如果你是有訂閱官方資源的，那可以直接註冊完之後使用，但如果沒有，我們在使用 `apt-get update` 的時候會發現一些 Error Message。
+
+> ![PVE Apt Update Error](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/PVE-Apt-Update-Error.png)
+
+為此我們要稍微調整一下資料來源。從 [官方文件](https://pve.proxmox.com/pve-docs/pve-admin-guide.html#sysadmin_package_repositories) 的說明裝可以看到 APT Repositories 的相關定義文件是由 `/etc/apt/sources.list` 跟 `/etc/apt/sources.list.d/` 裡面做維護。
+
+那 PVE 官方有直接說明，如果你是有訂閱的使用者，想取得穩定且預設的環境，會是由 `deb https://enterprise.proxmox.com/debian/pve bookworm pve-enterprise` 維護。如果你沒有訂閱，則可以直接參考下方調整並把東西貼到 `/etc/apt/sources.list` 中。
+
+```bash=
+deb http://ftp.debian.org/debian bookworm main contrib
+deb http://ftp.debian.org/debian bookworm-updates main contrib
+
+# Proxmox VE pve-no-subscription repository provided by proxmox.com,
+# NOT recommended for production use
+deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription
+
+# security updates
+deb http://security.debian.org/debian-security bookworm-security main contrib
+```
+
+而 `/etc/apt/sources.list.d/ceph.list` 裡面則是調整成 `deb http://download.proxmox.com/debian/ceph-quincy bookworm no-subscription`
+
 ## 情境盤點與宿舍網路結構拓樸圖
 
 先來回顧一下我目前設備跟網路的關係，不管學校那邊是如何對外溝通的，我從宿舍網路取得了一個對外的實體 IP，也就是 `140.114.234.160`，那我基本上的實體設備目前有 PVE Server / Desktop / Laptop / Phone ... 等等多個設備，但直接連接牆壁裡面的網路孔的只有一台設備，也就是我的 ASUS Router，因此我們回頭看一下現在的網路架構狀況如下。
