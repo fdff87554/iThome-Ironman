@@ -10,7 +10,7 @@ RouterOS 顧名思義是一個專門為 Router 所需要功能所設計的網路
 
 因此讓我們先從安裝 RouterOS 開始，一路講到如何達成目標吧！
 
-### RouterOS 的安裝與設定
+### RouterOS 的安裝
 
 RouterOS 的檔案可以直接從 MikroTik 的官方網站取得，https://mikrotik.com/software 。
 
@@ -36,7 +36,7 @@ RouterOS 的檔案可以直接從 MikroTik 的官方網站取得，https://mikro
    > ![PVE Create VM CPU Page](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/PVE-Create-VM-CPU-Page.png)
 7. Memory 的部分則是更隨意，由於 RouterOS 平時所需要的 Memory 平均在 170~200 MiB 左右而已，因此如果設備侷限，給 256 MB 就已經很足夠了，我是給到了 2GB。
    > ![RouterOS Memory Usage](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/RouterOS-Memory-Usage.png)
-   > 
+   >
    > ![PVE Create VM Memory Page](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/PVE-Create-VM-Memory-Page.png)
 8. 接下來網卡的部分，一樣預設就可以了，因為現在我們的 PVE 只有一個網卡，晚點我們在處理剩下的部分。
    > ![PVE Create VM Network Page](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/PVE-Create-VM-Network-Page.png)
@@ -48,11 +48,71 @@ RouterOS 的檔案可以直接從 MikroTik 的官方網站取得，https://mikro
    > ![PVE VM Hardware Settings - Detach Hardware](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/PVE-VM-Hardware-Settings_Detach-Hardware.png)
 2. 點選剛剛分離出來的 Unused Disk -> 選擇 Remove 刪除
    > ![PVE VM Hardware Settings - Remove Disk](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/PVE-VM-Hardware-Settings_Remove-Disk.png)
-3. 到剛剛的 MikroTik 官網，找到 CHR（Cloud Hosted Router） 的 Raw disk image 選擇 Stable 的任何一個開心版本都可以，那截圖時我是直接選最新版本的 Stable 版。
+3. 到剛剛的 MikroTik 官網，找到 CHR（Cloud Hosted Router） 的 Raw disk image 選擇 Stable 的任何一個開心版本都可以，那截圖時我是直接選最新版本的 Stable 版。右鍵複製 Download 的 Url 之後，我們等等會在 PVE 裡面用到。
    > ![RouterOS CHR Download Page](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/RouterOS-CHR-Download-Page.png)
-4. 
+4. 回到 PVE 的 Shell 中，依照下方指令完成
+   1. 檔案下載
+   2. 解壓縮
+   3. 設定空間大小
+   4. 掛載 disk
+   ```bash=
+   # 下載剛剛的 Raw Disk Image 檔案
+   $ wget https://download.mikrotik.com/routeros/7.11.2/chr-7.11.2.img.zip
+   # 解壓縮檔案，並取得 chr-7.11.2.img
+   $ unzip chr-7.11.2.img.zip
+   # 幫檔案增加一些空間（也就是 Disk Size 的部分），其實 RouterOS 不大，看學長設定是只有 128M，啊網路上一般來說建議可以加到 1G
+   $ qemu-img resize chr-7.11.2.img +1G
+   # 把剛剛的 .img 掛載到 VM 底下，這邊會用到剛剛記得的 VM ID，我們這邊是剛剛示範的 102，請記得改成自己的編號
+   $ qm importdisk 102 chr-7.11.2.img local-lvm
+   ```
+   > ![wget Download RouterOS to PVE](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/wget-Download-RouterOS-to-PVE.png)
+   > 
+   > ![unzip RouterOS in PVE](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/unzip-RouterOS-in-PVE.png)
+   > 
+   > ![resize RouterOS image in PVE](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/resize-RouterOS-image-in-PVE.png)
+   > 
+   > ![importdisk of RouterOS image to VM](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/importdisk-of-RouterOS-image-to-VM.png)
+5. 當我們看到 Successfully 的字樣之後，就可以回到 RouterOS VM 的頁面，可以看到一個 unused 的 Disk 被掛載完成。
+   > ![Get unused disk 0 for RouterOS VM](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/Get-unused-disk-0-for-RouterOS-VM.png)
+   然後我們直接點擊兩下，直接把 Disk 加入即可。
+   > ![Add unsed disk 0 to VM](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/Add-unsed-disk-0-to-VM.png)
+6. 把新的 Disk 掛到啟動順序中，到 Options -> 選擇 Boot Order -> 把剛剛掛載的 Disk 新增到啟動中。
+   > ![Change Boot Order of VM](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/Change-Boot-Order-of-VM.png)
+7. 這時候我們順便再添加一個網卡進去，這個網卡是專門給 VM 使用的網卡，也就是另外一個子網域的虛擬網卡。再有這張網卡 + 有這個準備啟動的軟路由之後，我們就會取得可愛的 VM 子網域了！要生成這個第二個虛擬網卡，我們先回到 PVE 的 System -> Network -> 點擊 Create -> 選擇 Linux Bridge 來創建新的網卡。
+   在 Edit 中，全部都不用填寫，我們剩下會用 RouterOS 來設定，這邊可以稍微用 Comment 註記你這個網卡是用來做什麼即可，從我的註記可以看到，我是希望提供 `192.168.52` 網域作為 VM 的子網域而開的網卡。
+   > ![Create Linux Bridge Network 1](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/Create-Linux-Bridge-Network-1.png)
+   > ![Create Linux Bridge Network 2](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/Create-Linux-Bridge-Network-2.png)
+8. 回到 RouterOS 的 Hardware 設定，除了預設的 vmbr0 以外，我們在幫他添加我們剛剛新增的網卡。點選 Hardware -> 選擇 Add -> 選擇 Network Device -> 選擇 vmbr2（就是你剛剛新增的網卡，也可能是 vmbr1，請依照狀況調整）
+   > ![Add Network to RouterOS VM 1](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/Add-Network-to-RouterOS-VM-1.png)
+   > 
+   > ![Add Network to RouterOS VM 2](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/Add-Network-to-RouterOS-VM-2.png)
+9. 到這邊我們所有設定就完成了，就讓我們啟動吧！看到 Mikrotik Login 即代表安裝完成！
+   > ![Start RouterOS](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/Start-RouterOS.png)
 
+使用預設帳號 `admin` 跟空白密碼（直接按 Enter）來完成剩下安裝！
 
+### RouterOS 的設定
+
+我們完成安裝了，並且也設定完 `admin` 帳號的新密碼，接下來我們就要開始設定各種東西了，但首先，要連上 RouterOS 我們一樣要知道他的 IP，並完成初次設定。
+
+在這邊我們依照以下步驟可以取得由 DHCP 給的第一次 IP，不管之後要不要使用 Static IP 都可以在接下來的 Web GUI 中設定，先讓我們找到現在的 IP。
+
+```bash=
+# 找到 ip address
+/ip/address
+# 印出現在的 ip address
+print
+```
+
+> ![find default RouterOS IP Address](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/find-default-RouterOS-IP-Address.png)
+
+從圖上可以看到第一次取得的 IP 是 `192.168.50.140`，連線上之後可以看到 RouterOS 跳出了第一次的設定畫面（再輸入帳號密碼之後）。
+
+> ![RouterOS First Setting Page](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/RouterOS-First-Setting-Page.png)
+
+在設定頁面中，我們分別依照我們的需求完成 `Internet` / `Local Network` 等設定，這邊其實跟我們前幾天在設定 ASUS Router 時的概念一模一樣，請大家試著理解看看下方截圖的設定。
+
+> ![RouterOS Router Setting](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/RouterOS-Router-Setting.png)
 
 ## Reference
 
