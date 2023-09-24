@@ -117,3 +117,5 @@ print
 ## Reference
 
 - [虛擬機跑起來！RouterOS CHR 軟路由效能輕鬆突破 1000M！](https://www.jkg.tw/p2531/)
+- https://wiki.mikrotik.com/wiki/Manual:IP/Address
+- [Install MikroTik Cloud Hosted Router (CHR) on Proxmox](https://mikrotik-blog.com/install-mikrotik-cloud-hosted-router-chr-on-proxmox)
