@@ -77,7 +77,6 @@ SSL 證書是一種數位證書，用於確認網站的身份和提供公鑰以�
 接下來我們還需要為我們的 PVE 準備 domain 跟取得第一次的證書，這邊我們就依照下方截圖來逐步操作即可！
 
 > ![PVE Node Certificates Setting and Get CA](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/PVE-Node-Certificates-Setting-and-Get-CA.png)
->
 
 這邊有幾個非常重要的部分要注意，
 
@@ -87,3 +86,12 @@ SSL 證書是一種數位證書，用於確認網站的身份和提供公鑰以�
 
 基本上到這邊我們就完成最簡單的 ACME 對 PVE 的憑證簽署了！這時候在用 domain 針對 PVE 進行連線的話，就會發現瀏覽器已經不會再提醒我們不安全的問題了！
 
+## 小結
+
+到這邊我們就算是完成幫我們的 PVE 進行簽署了，但可以發現首先
+
+1. `80` port 這麼常用且重要的 port 就這樣被佔用了，似乎有些可惜
+2. 如果今天很不幸的 `HTTP-01` 的簽署驗證沒過，是否有其他方法做到？
+3. 今天要幫其他服務簽署憑證，可沒有 PVE 這麼方便的系統，要怎麼簽署？
+
+讓我們明天再來聊聊吧！
