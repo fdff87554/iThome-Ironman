@@ -55,3 +55,40 @@ ACME 真的很方便，可能是我沒有很仔細關注與學習，之前第一
 > ![PVE Certificates ACME Setting](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/PVE-Certificates-ACME-Setting.png)
 
 之後一樣點下 `Order Certifficates Now` 重新取得憑證，即完成本次的 DNS-01 的挑戰方式的設定啦！
+
+## 為服務準備 ACME Client
+
+Certbot 是 Let's Encrypt 官方推薦的 ACME Client。它支持多種 web 伺服器和系統。你從 [Certbot 官網](https://certbot.eff.org/)可以找到你的系統的安裝指南。那我們就直接準備一個全新的 VM 來示範 Certbot 的安裝吧！
+
+假設我們的情境是一台 Ubuntu Server 並且用 Apache 維護一個網站前端，那當你在 Certbot 做選擇的時候可以選擇 Apache / Ubuntu 20，然後就可以依照下方的指示進行安裝了。那我們一樣準備基本需要的安裝指令。
+
+```bash
+# Prepare Basic Packages
+sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+
+# Install snapd
+sudo apt install snapd -y
+# - Run test
+sudo snap install hello-world
+hello-world
+
+# Remove certbot-auto and any Certbot OS packages
+sudo apt-get remove certbot # to mack sure when running certbot is on snapd
+
+# Install Certbot
+sudo snap install --classic certbot
+
+# Prepare Certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+# Run Certbot
+sudo certbot --apache
+```
+
+接下來會冒出基本的設定詢問，包含之前的 Domain / Email，相關設定跟 PVE 中的沒有任何差別，等完成後看到以下畫面就代表成功了！
+
+> ![Certbot ACME Client Setting](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/Certbot-ACME-Client-Setting.png)
+
+## 最後的最後
+
+我們剩最後一個題目了，也就是如何自建 CA，這部分就讓我們明天來了結他吧！
