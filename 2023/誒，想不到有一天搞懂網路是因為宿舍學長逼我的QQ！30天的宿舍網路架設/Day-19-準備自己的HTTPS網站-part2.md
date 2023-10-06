@@ -1,4 +1,4 @@
-# Day-19 - 準備自己的 HTTPS 網站 Part 2
+# Day-19 - 準備自己的 HTTPS 網站 - DNS Challenge / 自建 ACME Client
 
 昨天我們成功利用 ACME 跟我們的免費好朋友 Let's Encrypt 做到自動取得證書的完美結合了，但還記得昨天有說到的幾個部分嗎？
 
