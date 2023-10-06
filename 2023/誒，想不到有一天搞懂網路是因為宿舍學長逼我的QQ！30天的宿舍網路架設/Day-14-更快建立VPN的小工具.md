@@ -14,7 +14,7 @@
 
 - `Debian-WireGuardServer-BaseSetup.sh`
 
-  ```bash=
+  ```shell
   #!/bin/sh
   # Update & upgrade apt packages
   echo "Updating apt packages..."
@@ -63,14 +63,14 @@
 其實核心概念與 RouterOS 上的 WireGuard 設定近似，因此我們當然要先幫環境準備好基本需要的東西。
 
 1. WireGuard PrivateKey
-   ```bash=
+   ```bash
    wg genkey | sudo tee /etc/wireguard/private.key
    sudo chmod go=/etc/wireguard/private.key
    ```
    - `sudo chmod go=...` 命令會刪除 root 使用者以外的使用者和群組對該檔案的所有權限，以確保只有 root 使用者可以存取私鑰。
    - 這時候我們會收到一行 `base64` 編碼的私鑰輸出，這把鑰匙也會同步儲存在 `/etc/wireguard/private.key`
 2. 用剛剛的私鑰產生公鑰
-   ```bash=
+   ```bash
    sudo cat /etc/wireguard/private.key | wg pubkey | sudo tee /etc/wireguard/public.key
    ```
    這句指令分成三個部分，分別是
@@ -79,7 +79,7 @@
    3. `sudo tee /etc/wireguard/public.key`：最後一個指令取得公鑰產生指令的輸出並將其重新導向到名為 `/etc/wireguard/public.key` 中。
    - 這時候我們會收到一行 `base64` 編碼的公鑰輸出。
 3. 跟在 RouterOS 中一樣準備 Interface 相關設定，那由於我們剛剛有私鑰了，因此我們直接創建設定檔案到 `/etc/wireguard/wg0.conf` 中。
-   ```conf=
+   ```conf
    # /etc/wireguard/wg0.conf
    [Interface]
    PrivateKey = base64_encoded_private_key_goes_here
@@ -91,7 +91,7 @@
 第四步驟的設定是當我們希望藉由 VPN 做到外網連線才需要設定的，如果不需要可以跳過
 
 4. 設定 IP Forwarding，編輯 `/etc/sysctl.conf`
-   ```conf=
+   ```conf
    net.ipv4.ip_forward=1
    ```
    並且可以使用下面指令檢查環境 `sudo sysctl -p`，可以看到我們的變更狀況
@@ -99,7 +99,7 @@
 5. 設定基本的流量規則，需要將我們的接口流量給放行，因此這邊我們依照
    1. 使用 `ip route list default` 指令確認 WireGuard 伺服器的公共網路介面，Output 可能會長得像這樣 `default via 203.0.113.1 dev eth0 proto static`，裡面的 `eth0` 就會是我們要記得的部分。
    2. 在剛剛的 `/etc/wireguard/wg0.conf` 檔案中新增以下設定在剛剛的 `SaveConfig = true` 指令後面。
-      ```config=
+      ```conf
       PostUp = iptables -t nat -I POSTROUTING -o <interface_of_your_os> -j MASQUERADE
       PreDown = iptables -t nat -D POSTROUTING -o <interface_of_your_os> -j MASQUERADE
       ```
@@ -114,7 +114,7 @@
 
 1. `compose.yml` 這邊準備了所有關於 Docker Container 的相關需求，直接上範例：
 
-```yaml=
+```yaml
 services:
   # 創建一個名為 wg-portal 的容器
   wg-portal:
@@ -145,7 +145,7 @@ services:
 
 2. `config.yml` 規定了關於 WG-Portal 的所有基本設定，一樣直接看設定：
 
-```yaml=
+```yaml
 advanced:
   log_level: trace
 

@@ -64,7 +64,7 @@ WireGuard VPN 跟 OpenVPN 一樣，是一種 VPN 程式與協定，其不只開�
 1. Interface 的部分跟 VPN Server 的設定的街口很像，你要提供一個 VPN Client 跟 VPN Server 的建立連線接口，那這邊當然也要有基本的資訊，包含我們之前提過的，你在這個網路位址身份也就是 Address，環境的 DNS 跟 MTU，有沒有發現跟 VPN Server 很像。
 2. 那第二個部分就是我們的 Peer 了啦，跟驗證身份當然缺少不了 Public Key 了，這邊 Server 的 Public Key 就是前面 Server Interface 產生的 Key，然後 Endpoint 就是我們的目標 VPN 的位置啦！Port 就是剛剛 VPN 的 Port，我們剛剛設定 `13231` 就照舊啦。AllowedIPs 是一個很迷人的參數，這邊說明有哪些流量會流向 VPN Server，這邊也就跟剛剛上面 VPN Server 的慨念一樣，因此當我們設定 `0.0.0.0/0` 時就代表所有網路流量都會走 VPN 通道像 VPN Server 過去，但如果假如我們今天只要 Subnet 的流量過去可以怎麼設定？`AllowedIPs = 10.0.0.0/24, 192.168.52.0/24` 其實就可以了！這代表我們 VPN 連線的相關流量跟 52 子網段的流量會通往 VPN，但剩下的流量都不會。最後一個 PersistentKeepalive 則是多久進行連線狀況檢查。
 
-```make=
+```conf
 [Interface]
 PrivateKey = CLIENT_PRIVATE_KEY_HERE
 Address = 10.0.0.2/32
@@ -80,7 +80,7 @@ PersistentKeepalive = 25
 
 所以今天連線可以怎麼設定，就是如下設定啦！
 
-```make=
+```conf
 [Interface]
 PrivateKey = CLIENT_PRIVATE_KEY_HERE
 Address = 10.0.0.2/32

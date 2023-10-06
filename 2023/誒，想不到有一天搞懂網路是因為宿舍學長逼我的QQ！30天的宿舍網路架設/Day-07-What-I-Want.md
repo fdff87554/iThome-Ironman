@@ -14,7 +14,7 @@
 
 如果你沒有訂閱，一樣要到 `/etc/apt/sources.list.d/pve-enterprise.list` 中註解，然後可以直接參考下方調整並把東西貼到 `/etc/apt/sources.list` 中。
 
-```bash=
+```bash
 deb http://ftp.debian.org/debian bookworm main contrib
 deb http://ftp.debian.org/debian bookworm-updates main contrib
 

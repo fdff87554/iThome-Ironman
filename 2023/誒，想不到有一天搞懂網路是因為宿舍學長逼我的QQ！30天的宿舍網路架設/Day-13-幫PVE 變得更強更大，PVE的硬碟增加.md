@@ -38,7 +38,7 @@
 
 那輸入完之後會直接進入 fdisk 的操作介面，他們會問幾個問題，
 
-```bash=
+```bash
 Command (m for help): n
 Select (default p): (直接按下enter)
 Partition number (1-4, default 1): (直接按下enter)
