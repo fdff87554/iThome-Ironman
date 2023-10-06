@@ -12,9 +12,9 @@
 
 ACME 真的很方便，可能是我沒有很仔細關注與學習，之前第一次接觸憑證相關知識時應該是沒有這麽方便簽署憑證的東西了，因此 ACME 能夠將憑證獲取的方式全部自動化確實真的很方便，但我們是否可以在這種方便中在更完善一些呢？不要讓資源有任何一絲的浪費吧！
 
-昨天提到的 `HTTP-01` 挑戰的邏輯其實很簡單，可以想像成用原本的 HTTP 來進化成 HTTPS，那其實除了 `HTTP-01` 的挑戰方式外，還有另外一種常見的挑戰方式就是 `DNS-01`，那在昨天的[官方文件](https://letsencrypt.org/zh-tw/docs/challenge-types/)中有說明到，概念上今天 ACME 會藉由在 Let’s Encrypt 給予 ACME 客戶端 token，讓 Client 拿 token 與帳號金鑰進行運算，並產生一段文字，請將這段文字利用 TXT 紀錄放在 DNS 的主機名稱 \_acme-challenge.<YOUR_DOMAIN> 底下。
+昨天提到的 `HTTP-01` 挑戰的邏輯其實很簡單，可以想像成用原本的 HTTP 來進化成 HTTPS，那其實除了 `HTTP-01` 的挑戰方式外，還有另外一種常見的挑戰方式就是 `DNS-01`，那在昨天的[官方文件](https://letsencrypt.org/zh-tw/docs/challenge-types/)中有說明到，概念上今天 ACME 會藉由在 Let’s Encrypt 給予 ACME 客戶端 token，讓 Client 拿 token 與帳號金鑰進行運算，並產生一段文字，請將這段文字利用 TXT 紀錄放在 DNS 的主機名稱 `\_acme-challenge.<YOUR_DOMAIN>` 底下。
 
-那簡單來說就是利用跟 DNS 服務商進行擁有 Domain 的「證明」的概念，但這邊會有一個小問題，也就是現在所使用的 DNS 服務商會需要提供這個 API 街口來協助我們做到這件事情。
+那簡單來說就是利用我們可以調整 DNS 服務商上我們的 Domain 資訊來進行擁有 Domain 的「證明」的概念，讓 Let's Encrypt 這些 CA 可以直接利用 DNS 資訊了解我們是擁有這個 Domain 的，但這邊會有一個小問題，也就是現在所使用的 DNS 服務商會需要提供這個 API 街口來協助我們做到這件事情。
 
 那我們今天就直接利用我目前正在用的 CloudFlare 做示範來帶大家準備自己的 DNS-01 ACME Client 吧！
 
@@ -55,6 +55,8 @@ ACME 真的很方便，可能是我沒有很仔細關注與學習，之前第一
 > ![PVE Certificates ACME Setting](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/PVE-Certificates-ACME-Setting.png)
 
 之後一樣點下 `Order Certifficates Now` 重新取得憑證，即完成本次的 DNS-01 的挑戰方式的設定啦！
+
+那如果今天我們不是使用 PVE 這種已經有預裝好甚至融合好 ACME 系統的，那我們要怎麼做到呢？就讓我們來自己準備自己的 ACME Client 吧！
 
 ## 為服務準備 ACME Client
 
