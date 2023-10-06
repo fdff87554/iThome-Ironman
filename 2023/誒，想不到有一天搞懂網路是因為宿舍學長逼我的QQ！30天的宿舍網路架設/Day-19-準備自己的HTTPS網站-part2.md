@@ -14,7 +14,7 @@ ACME 真的很方便，可能是我沒有很仔細關注與學習，之前第一
 
 昨天提到的 `HTTP-01` 挑戰的邏輯其實很簡單，可以想像成用原本的 HTTP 來進化成 HTTPS，那其實除了 `HTTP-01` 的挑戰方式外，還有另外一種常見的挑戰方式就是 `DNS-01`，那在昨天的[官方文件](https://letsencrypt.org/zh-tw/docs/challenge-types/)中有說明到，概念上今天 ACME 會藉由在 Let’s Encrypt 給予 ACME 客戶端 token，讓 Client 拿 token 與帳號金鑰進行運算，並產生一段文字，請將這段文字利用 TXT 紀錄放在 DNS 的主機名稱 `\_acme-challenge.<YOUR_DOMAIN>` 底下。
 
-那簡單來說就是利用我們可以調整 DNS 服務商上我們的 Domain 資訊來進行擁有 Domain 的「證明」的概念，讓 Let's Encrypt 這些 CA 可以直接利用 DNS 資訊了解我們是擁有這個 Domain 的，但這邊會有一個小問題，也就是現在所使用的 DNS 服務商會需要提供這個 API 街口來協助我們做到這件事情。
+那簡單來說就是利用我們可以調整 DNS 服務商上我們的 Domain 資訊來進行擁有 Domain 的「證明」的概念，讓 Let's Encrypt 這些 CA 可以直接利用 DNS 資訊了解我們是擁有這個 Domain 的，但這邊會有一個小問題，也就是現在所使用的 DNS 服務商會需要提供這個 API 介面來協助我們做到這件事情。
 
 那我們今天就直接利用我目前正在用的 CloudFlare 做示範來帶大家準備自己的 DNS-01 ACME Client 吧！
 
