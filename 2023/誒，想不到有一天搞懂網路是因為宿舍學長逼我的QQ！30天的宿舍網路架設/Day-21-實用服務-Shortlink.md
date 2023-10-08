@@ -54,7 +54,7 @@ sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
 
 # Install Packages
 echo "Installing packages..."
-sudo apt install -y unzip curl wget git snapd
+sudo apt install -y unzip curl wget git
 
 # Setup docker
 echo "Setting up docker..."
@@ -63,18 +63,13 @@ sh get-docker.sh
 sudo usermod -aG docker $USER
 newgrp docker
 rm get-docker.sh
-
-# Install Certbot
-echo "Installing certbot..."
-# - Install snapd
-sudo apt install snapd -y
-# - Install certbot
-sudo snap install --classic certbot
-# - Prepare the Certbot command
-sudo ln -s /snap/bin/certbot /usr/bin/certbot
 ```
 
+上面的安裝腳本會幫我們把 Docker 這個本次必要的環境給準備好！
+
 ### YOURLS 的 docker 環境
+
+那非常開心的，YOURLS 本身有維護官方的 Docker Image 了！因此我們只要依照下方一樣給予正確的設定，即可以運行 YOURLS 了！
 
 ```yaml
 services:
@@ -87,8 +82,8 @@ services:
       - ./database/data:/var/lib/mysql
       - ./database/backup:/backup
     environment:
-      MYSQL_ROOT_PASSWORD: langyun_yourls
-      MYSQL_DATABASE: yourls
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: example
     ports:
       - 3306:3306
     platform: linux/amd64
@@ -101,11 +96,29 @@ services:
     ports:
       - 8080:80
     environment:
-      YOURLS_DB_PASS: langyun_yourls
-      YOURLS_SITE: https://short.crazyfirelee.tw
-      YOURLS_USER: langyun
-      YOURLS_PASS: langyun_yourls
+      YOURLS_DB_PASS: example
+      YOURLS_SITE: https://short.crazyfirelee.tw:8080
+      YOURLS_USER: example
+      YOURLS_PASS: example
     depends_on:
       - mysql
     platform: linux/amd64
 ```
+
+那上述 Docker Compose 的設定檔案，我們可以看到我們使用了兩個服務，一個是 MySQL 用來儲存資料，另一個就是 YOURLS 本身的服務，其中我們可以看到 YOURLS 本身的設定，我們設定了
+
+1. `YOURLS_DB_PASS`：也就是 MySQL 的密碼，這邊我們設定為 `example`，主要是因為 YOURLS 這個短網址服務會跟前面提到的一樣，要有地方存放原本的網址跟新的網址，因此我們需要一個資料庫來儲存這些資訊，而這個密碼就是用來讓 YOURLS 能夠正確連線到資料庫的密碼。
+2. `YOURLS_SITE`：則是我們服務的網站 Domain，那這邊為了建立 HTTPS 的服務，勢必會需要有一個 Domain，當然如果純粹使用 http 的話，是可以給 IP 的，又或者我們不期望設定 HTTPS 也可以設定 HTTP 的連線。
+3. `YOURLS_USER` / `YOURLS_PASS`：這兩個則是 YOURLS 服務的帳號密碼，身為一個 Personal Host 的服務，當然不可能隨便讓其他使用者都使用，因此我們需要一個帳號密碼來讓我們能夠管理服務。
+
+這個時候我們還差一部就是設定 HTTPS 的 Reverse Proxy，但這邊我們已經可以利用 HTTP 來連線我們的服務了！
+
+> 可以使用
+>
+> 1. `http://<IP>:8080` 來訪問，例如 `http://192.168.50.200:8080/admin` 來先看到準備好的服務
+> 2. `http://<domain>:8080` 來訪問，例如 `http://short.crazyfirelee.tw:8080/admin` 來先看到準備好的服務
+>    那這邊看到的服務會有幾個需要注意的事項
+> 3. 會一直被 Redirect 到 HTTPS 的服務，因為我們設定了 `YOURLS_SITE` 為 HTTPS 的服務，那 YOURLS 他的網址服務會自己預設 Redirect 回當初的設定值，因此如果發現無法訪問特定功能，可以先手動把 HTTPS 拔掉即可。
+> 4. 畫面的 Image 無法正確載入，因為其訪問的 PATH 為 HTTPS，是寫死的，因此要等到後面的 Reverse Proxy 設定完方能正常載入。
+
+到這邊當我們訪問 `https://short.crazyfirelee.tw:8080` 時，就可以看到 YOURLS 的服務了，當然我們還需要設定 HTTPS 的服務，那這邊我們可以另外使用 Nginx 來做 Reverse Proxy。
