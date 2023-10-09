@@ -44,6 +44,42 @@ cd qrcode-generator
 
 由於這是一個開源項目，我們可以根據需要進行修改，例如更改界面的設計、增加新的功能等。
 
+### 部署
+
+那一樣，為了讓服務能夠被正確的使用 domain 訪問到正確的服務而不用一直切換 port，因此一樣會需要用 nginx 來做 proxy。而且昨天使用 docker 的好處就是我們可以把好幾個服務都用 docker 做運作與隔離，因此我們不用另外再開機器，在原本的機器中就可以把新的服務包裝進去 Docker 中。
+
+```yaml
+qrcode-generator:
+  image: bizzycolah/qrcode-generator:latest
+  hostname: qrcode-generator
+  container_name: qrcode-generator
+  restart: unless-stopped
+  ports:
+    - 8081:80
+  expose:
+    - 80:80
+  platform: linux/amd64
+```
+
+在原本的 docker compose 中另外加上這個服務，並且把 port 8081 對應到 80，並且在 Nginx 的 config 中加入相關的 domain 資訊。
+
+```conf
+server {
+    listen 80;
+    server_name qrcode.crazyfirelee.tw;
+
+    location / {
+        proxy_pass http://qrcode-generator:80;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+}
+```
+
 ## 總結
 
 QRCode 產生器是一個非常實用的工具，尤其是在今天的移動時代。通過使用 [qrcode-generator](https://github.com/bizzycola/qrcode-generator)，我們可以輕鬆地生成 QRCode，而不需要依賴外部服務。希望這篇文章能幫助你開始你的 QRCode 產生器之旅！
