@@ -69,8 +69,14 @@ apt upgrade -y
 
 ```bash
 apt update
+# 官方文件所述
 apt dist-upgrade -y
+# 但實際上我們會使用 full-upgrade 這個指令
+apt full-upgrade -y
 ```
+
+> `full-upgrade` 跟 `dist-upgrade` 其實差異很模糊，一般來說 `full-upgrade` 算是 `dist-upgrade` 的別名，但在部份解釋文件中，可以看到 `full-upgrade` 相比 `dist-upgrade` 是一個更加激進的更新方式。
+> 但我們依照 [AskUbuntu](https://askubuntu.com/questions/770135/apt-full-upgrade-versus-apt-get-dist-upgrade/1316448#1316448) 的說明討論可以看到，`dist-upgrade` 跟 `full-upgrade` 屬於別名的關係，因此上述操作時，我們可以就參考 PVE 官方文件說明，或者依照用新不用舊的原則，選擇使用 `full-upgrade` 指令即可。
 
 ### PVE 的大版本更新
 
@@ -87,6 +93,9 @@ pve7to8
 # for all checks enabled
 pve7to8 --full
 ```
+
+> 請注意，在進行大版本更新前，PVE 官方文件有說明需要先在 PVE 7 中更新到最新版本，才能進行 PVE 8 的更新，因此請先確認 PVE 7 是否已經更新到最新版本。
+> - 可以直接運行 `apt update && apt dist-upgrade -y` 進行第一次 PVE 7 內的小版本更新
 
 因此舉例來說，這次我們要將 PVE 7 更新到 PVE 8，我們就會需要將 `sources.list` 檔案中的版本更改為 PVE 8 的版本，並且運行 `dist-upgrade` 指令，這樣的更新方式就會是大版本更新，而更新的項目就是將原本的 `bullseye` 目標點更新成 `bookworm` 目標點，而更新方式可以利用 `sed` 指令來進行替換。
 
