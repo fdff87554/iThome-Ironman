@@ -1,6 +1,6 @@
 # Day-26 - 串連多個 PVE！PVE 的 Cluster / 叢集服務
 
-那不知道大家跟我一起玩 PVE 到現在，有沒有發現一個很微妙的事情，就是雖然我們的操作大部分是 PVE 這的系統本身，但是 PVE 卻不是操作上的最高管理層級與結構，上面還有一層名叫 Data Center（資料中心）的東西，究竟為什麼會有這個層級呢？他在 PVE 的架構中扮演什麼樣的角色呢？
+那不知道大家跟我一起玩 PVE 到現在，有沒有發現一個很微妙的事情，就是雖然我們的操作大部分是 PVE 這個系統本身，但是 PVE 卻不是操作上的最高管理層級與結構，上面還有一層名叫 Data Center（資料中心）的東西，究竟為什麼會有這個層級呢？它在 PVE 的架構中扮演什麼樣的角色呢？
 
 ## PVE 的管理層級：從 Data Center 到 VM
 
@@ -28,18 +28,18 @@
 
 在 Cluster 的概念中，會有幾個角色，分別是：
 
-1. Main Cluster：主要的 Cluster，身為其他所有設備的中心，負責讓其他節點知道應該向誰靠攏。
-2. Nodes：設備們，會像 Cluster 做聚攏，會藉由 Main Cluster 來做設定與管理。
+1. Init Cluster：初始的 Cluster，身為其他所有設備的中心，負責讓其他節點知道應該向誰靠攏。
+2. Nodes：設備們，會像 Cluster 做聚攏，會藉由 Init Cluster 來做設定與管理。
 
-但這邊有一個重點，在 Cluster 的世界中，所有 Nodes 都是平等的，這個 Main Cluster 存在的意義只有讓其他 Nodes 知道找誰註冊成為 Cluster 的一部份，而不是說 Main Cluster 會有比其他 Nodes 更高的權限。
+但這邊有一個重點，在 Cluster 的世界中，所有 Nodes 都是平等的，這個 Init Cluster 存在的意義只有讓其他 Nodes 知道找誰註冊成為 Cluster 的一部份，而不是說 Init Cluster 會有比其他 Nodes 更高的權限。
 
-那作法很簡單，我們先選定一個設備，然後在剛剛的 Cluster 設定頁面中，點選「Create Cluster」，將自己註冊成為 Main Cluster，作為其他設備的中心。我們下方的 Example 會直接用兩台 PVE 做示範，下方截圖中，會由畫面左邊的 `pve-1` 作為 Main Cluster，右邊的 `pve-2` 則是 Nodes。
+那作法很簡單，我們先選定一個設備，然後在剛剛的 Cluster 設定頁面中，點選「Create Cluster」，將自己註冊成為 Init Cluster，作為其他設備的中心。我們下方的 Example 會直接用兩台 PVE 做示範，下方截圖中，會由畫面左邊的 `pve-1` 作為 Init Cluster，右邊的 `pve-2` 則是 Nodes。
 
 > 有一個小重點，就是兩台 PVE Node 的名稱要不一樣，要不然會因為衝突的識別名稱而無法設定。
 >
 > ![Examples for PVE Cluster Setting](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/Examples-for-PVE-Cluster-Setting.png)
 
-首先要到 Data Center 的 Cluster 選項中，先建立 Cluster，這邊我們選擇 `pve-1` 作為 Main Cluster，所以我們在 `pve-1` 的 Cluster 設定頁面中，點選「Create Cluster」，然後就會跳出一個視窗，讓我們輸入 Cluster 的名稱，這邊我們就直接輸入 `Example-Cluster`，然後點選「Create」，就會為我們創建。
+首先要到 Data Center 的 Cluster 選項中，先建立 Cluster，這邊我們選擇 `pve-1` 作為 Init Cluster，所以我們在 `pve-1` 的 Cluster 設定頁面中，點選「Create Cluster」，然後就會跳出一個視窗，讓我們輸入 Cluster 的名稱，這邊我們就直接輸入 `Example-Cluster`，然後點選「Create」，就會為我們創建。
 
 > ![Examples for Create Cluster](https://raw.githubusercontent.com/fdff87554/iThome-Ironman/main/2023/%E8%AA%92%EF%BC%8C%E6%83%B3%E4%B8%8D%E5%88%B0%E6%9C%89%E4%B8%80%E5%A4%A9%E6%90%9E%E6%87%82%E7%B6%B2%E8%B7%AF%E6%98%AF%E5%9B%A0%E7%82%BA%E5%AE%BF%E8%88%8D%E5%AD%B8%E9%95%B7%E9%80%BC%E6%88%91%E7%9A%84QQ%EF%BC%8130%E5%A4%A9%E7%9A%84%E5%AE%BF%E8%88%8D%E7%B6%B2%E8%B7%AF%E6%9E%B6%E8%A8%AD/Images/Examples-for-Create-Cluster.png)
 
