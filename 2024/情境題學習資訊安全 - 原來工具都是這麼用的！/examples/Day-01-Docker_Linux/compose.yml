@@ -1,0 +1,10 @@
+services:
+  ls_practice:
+    build: ./ls_practice
+    container_name: ls_practice
+    ports:
+      - "9001:9001"
+    restart: unless-stopped
+    read_only: true
+    volumes:
+      - ./ls_practice/flag:/home/user/list_command_can_find_a_lot_of_inform/.flag:ro
